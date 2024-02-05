@@ -1,3 +1,4 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HeaderComponent } from "./Components/Header/Header"
 import { IndexPage } from "./Pages/Index/Index"
 import styled, { ThemeProvider } from "styled-components";
@@ -27,13 +28,20 @@ const MainWrapper = styled.div`
   color: ${props => props.theme.primaryColor};  
 `
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <IndexPage/>,
+  },
+]);
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <HeaderComponent/>
         <Main>
           <MainWrapper>
-            <IndexPage/>
+            <RouterProvider router={router} />
           </MainWrapper>
         </Main>
     </ThemeProvider>

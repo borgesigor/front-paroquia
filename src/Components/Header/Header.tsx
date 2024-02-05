@@ -239,7 +239,7 @@ const MenuElement = styled.div`
     opacity: 0;
     transition: ${HeaderBGTransitionTime};
     visibility: hidden;
-    top: -20px;
+    top: -10px;
     z-index: -1;
   }
 
