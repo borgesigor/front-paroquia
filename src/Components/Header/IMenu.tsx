@@ -1,5 +1,3 @@
-import { CardComponent } from "../Card/Card"
-
 interface Items{
   image?: string,
   icon?: string,
