@@ -1,4 +1,4 @@
-import logo from '../../assets/logo.svg'
+import logo from './../../assets/logo.svg'
 import { useEffect, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { DropdownComponent } from "./Dropdown";
