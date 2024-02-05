@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import * as stylex from '@stylexjs/stylex'
 import { styled } from 'styled-components';
 
 interface Props{
