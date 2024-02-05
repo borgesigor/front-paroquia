@@ -24,9 +24,9 @@ export function TitleComponent(props: Props) {
   return ( 
     <>
       <TitleContainer>
-        <h2 {...stylex.props(titleContainer.title)} >{title}</h2>
+        <Title>{title}</Title>
         { seeMore &&
-            <span {...stylex.props(titleContainer.seeMore)} >Ver mais</span>
+            <SeeMore>Ver mais</SeeMore>
         }
       </TitleContainer>
     </>
@@ -42,17 +42,17 @@ const TitleContainer = styled.div`
   color: ${props => props.theme.primaryColor };
 `
 
-const titleContainer = stylex.create({
-  title: {
-    fontSize: '1.5rem'
-  },
-  seeMore: {
-    fontSize: '0.9rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    textDecoration: {
-      default: 'none',
-      ':hover': 'underline'
-    }
+const Title = styled.h2`
+  font-size: 1.5rem;
+`
+
+const SeeMore = styled.span = styled.div`
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
-})
+`
