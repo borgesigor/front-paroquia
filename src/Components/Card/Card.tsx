@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface Props{
@@ -13,28 +14,30 @@ interface Props{
 
 export function CardComponent(props: Props) {
   return ( 
-    <Card href={props.href} >
-      {
-        props.image &&
-        <Image>
-          <img loading="lazy" src={props.image} alt="" />
-        </Image>
-      }
-      <CardData>
+    // <Link to={props.href} >
+      <Card href={props.href} >
         {
-          props.imageSmall &&
+          props.image &&
+          <Image>
+            <img loading="lazy" src={props.image} alt="" />
+          </Image>
+        }
+        <CardData>
+          {
+            props.imageSmall &&
             <img loading="lazy" src={props.imageSmall} alt="" width={40} />
-        }
-        {
-          props.icon &&
+          }
+          {
+            props.icon &&
             <i style={{ fontSize: '1.5rem', marginLeft: '-2px' }} className="iconsax" icon-name={props.icon}></i>
-        }
-        <DataElement>
-          <span className='title'>{props.title}</span>
-          { props.description && <span className='description'>{props.description}</span> }
-        </DataElement>
-      </CardData>
-    </Card>
+          }
+          <DataElement>
+            <span className='title'>{props.title}</span>
+            { props.description && <span className='description'>{props.description}</span> }
+          </DataElement>
+        </CardData>
+      </Card>
+    // </Link>
   );
 }
 
