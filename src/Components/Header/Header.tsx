@@ -1,4 +1,4 @@
-import logo from './../../assets/logo.svg'
+import Logo from './../../assets/logo.svg'
 import { useEffect, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { DropdownComponent } from "./Dropdown";
@@ -8,10 +8,20 @@ import { MobileMenuComponent } from './MobileMenu';
 
 const HeaderBGTransitionTime = '0.2s'
 
-export function HeaderComponent() {
+interface Props{
+  forceBackground?: boolean
+}
+
+export function HeaderComponent(props: Props) {
   const [headerBGVisibility, setHeaderBGVisibility] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  useEffect(() => {
+    if(props.forceBackground){
+      setHeaderBGVisibility(true)
+    }
+  }, [props.forceBackground])
   
   const menuOnMouseEnter = () => {
     setDropdownVisible(true)
@@ -21,7 +31,7 @@ export function HeaderComponent() {
   const menuOnMouseLeave = () => {
     setDropdownVisible(false)
 
-    if(!scrolled){
+    if(!scrolled && !props.forceBackground){
       setHeaderBGVisibility(false);
     }
   }
@@ -29,7 +39,7 @@ export function HeaderComponent() {
   useEffect(()=>{
     if(scrolled){
       setHeaderBGVisibility(true);
-    }else if(!dropdownVisible){
+    }else if(!dropdownVisible && !props.forceBackground){
       setHeaderBGVisibility(false)
     }
   }, [scrolled])
@@ -66,34 +76,37 @@ export function HeaderComponent() {
         <HeaderWrapper>
 
           <Left>
-            {
-              MenuArray.map((elem, index) => 
-                <MenuElement key={index} onMouseEnter={() => elem.dropdown && menuOnMouseEnter() } onMouseLeave={menuOnMouseLeave} >
-                  <Menu >
-                    <span>
-                      { elem.menu }
-                    </span>
-                    <span>
-                      { 
-                        elem.dropdown &&  
-                        <i className="iconsax" icon-name="chevron-down"></i>
-                      }
-                    </span>
-                  </Menu>
-                  {
-                    (elem.dropdown) &&
-                      <Dropdown className='dropdown' >
-                        <DropdownComponent menu={elem}/>
-                      </Dropdown>
-                  }
-                </MenuElement>
-              )
-
-            }
+            <ReactSVG src={Logo}/>
           </Left>
 
-          <Middle $BGVisibility={headerBGVisibility} >
-            <ReactSVG src={logo}/>
+          <Middle>
+            <div className='mobile-hide'>
+              {
+                MenuArray.map((elem, index) => 
+                  <MenuElement key={index} onMouseEnter={() => elem.dropdown && menuOnMouseEnter() } onMouseLeave={menuOnMouseLeave} >
+                    <Menu href={elem.path}>
+                      <span>
+                        { elem.menu }
+                      </span>
+                      <span>
+                        { 
+                          elem.dropdown &&  
+                          <i className="iconsax" icon-name="chevron-down"></i>
+                        }
+                      </span>
+                    </Menu>
+                    {
+                      (elem.dropdown) &&
+                        <Dropdown className='dropdown' >
+                          <DropdownComponent menu={elem}/>
+                        </Dropdown>
+                        
+                    }
+                  </MenuElement>
+                )
+
+              }
+            </div>
           </Middle>
 
           <Right>
@@ -126,23 +139,38 @@ const Dropdown = styled.div`
   margin-top: ${HeaderSize};
   background: white;
   width: 100%;
-  left: 0;
+  left: 0px;
 
   padding: 2rem 4rem;
+  padding-bottom: 2rem;
   box-sizing: border-box;
 
   border-bottom: 1px solid;
   border-color: ${props => props.theme.borderColor};
+
+  box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.011),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.016),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.02),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.024),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.029),
+    100px 100px 80px rgba(0, 0, 0, 0.04)
+  ;
+
 `
 
 const Menu = styled.a`
-  opacity: 0.8;
+  opacity: 0.7;
   height: 100%;
   width: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 0rem 2rem;
+  padding: 0rem 1.5rem;
+  transition: 0.2s;
+  transition-property: opacity;
+  display: flex;
+  gap: 0.2rem;
 
   &:hover{
     opacity: 1;
@@ -163,6 +191,11 @@ const Header = styled.div<{ $BGVisibility: boolean }>`
   font-family: ${props => props.theme.secondaryFont};
   border-bottom: 1px solid;
   border-color: ${props => props.$BGVisibility ? props.theme.borderColor : 'transparent'};
+
+  svg{
+    width: 3.3rem;
+    fill: ${props => props.$BGVisibility ? props.theme.primaryColor : 'white'};
+  }
 
   @media screen and (max-width: 1100px) {
     padding: 0rem 2rem;
@@ -189,10 +222,6 @@ const Left = styled.div`
   justify-content: left;
   align-items: center;
   height: 100%;
-
-  @media screen and (max-width: 1100px) {
-    display: none;
-  }
 `
 
 const Right = styled.div`
@@ -208,19 +237,19 @@ const Right = styled.div`
   }
 ` 
 
-const Middle = styled.div<{ $BGVisibility: boolean }>`
+const Middle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
 
-  @media screen and (max-width: 1100px) {
-    justify-content: left;
+  .mobile-hide{
+    display: flex;
+    height: 100%;
   }
 
-  svg{
-    width: 3.2rem;
-    fill: ${props => props.$BGVisibility ? props.theme.primaryColor : 'white'};
+  @media screen and (max-width: 1100px) {
+    display: none;
   }
 `
 
@@ -229,25 +258,25 @@ const MenuElement = styled.div`
   background: transparent;
   border: none;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-content: center;
-  position: relative;
-  left: -2rem;
 
   .dropdown{
     opacity: 0;
-    transition: ${HeaderBGTransitionTime};
+    transition: ${HeaderBGTransitionTime} ease-in-out;
     visibility: hidden;
-    top: -10px;
+    top: 0px;
     z-index: -1;
+    overflow: hidden;
+    transform: translateY(-10px);
   }
 
   &:hover{
     .dropdown{
       visibility: visible;
       opacity: 1;
-      top: 0;
+      transform: translateY(0px);
     }
   }
 `
@@ -257,8 +286,15 @@ const Button = styled.div`
   background: transparent;
   border: none;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.7;
+  transition: 0.2s;
+  transition-property: opacity;
+
+  &:hover{
+    opacity: 1;
+  }
 `

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HeaderComponent } from "./Components/Header/Header"
 import { IndexPage } from "./Pages/Index/Index"
 import styled, { ThemeProvider } from "styled-components";
+import { StreamingPage } from "./Pages/Streaming/Streaming";
 
 const theme = {
   background: '#FFFFFF',
@@ -12,7 +13,7 @@ const theme = {
   borderHardColor: '#666666',
   primaryFont: 'Merriweather, serif',
   secondaryFont: 'Inter, sans-serif',
-  headerWidth: '1660px'
+  headerWidth: '1280px'
 };
 
 const Main = styled.div`
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
     path: "/",
     element: <IndexPage/>,
   },
+  {
+    path: "/assistir",
+    element: <StreamingPage/>
+  }
 ]);
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <HeaderComponent/>
+      {/* <HeaderComponent forceBackground/> */}
         <Main>
           <MainWrapper>
             <RouterProvider router={router} />

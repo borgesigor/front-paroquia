@@ -17,7 +17,7 @@ export function ButtonComponent(props: Props) {
 }
 
 const Button = styled.button<{ $inverted?: boolean, $responsive?: boolean }>`
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   background: ${props => props.$inverted ? props.theme.primaryColor : props.theme.background};
@@ -30,4 +30,5 @@ const Button = styled.button<{ $inverted?: boolean, $responsive?: boolean }>`
   width: fit-content;
   line-height: 170%;
   width: ${props => props.$responsive ? '100%' : 'fit-content'};
+  /* font-family: ${props => props.theme.secondaryFont}; */
 `

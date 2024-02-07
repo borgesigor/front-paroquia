@@ -14,18 +14,17 @@ export function SectionOneComponent() {
           <TitleWithComponent>
             <TitleComponent title="Reze Conosco"/>
             <Grid $columns={2} $rows={2} >
-              <CardComponent href="" title="Missa Online" description="Assista de onde estiver" icon="play" />
+              <CardComponent href="/assistir" title="Missa Online" description="Assista nossas Missas, de onde estiver." icon="play" />
               <CardComponent href="" title="Enviar Intenções" description="Intenções para serem lidas em missa" icon="send-2" />
-              <CardComponent href="" title="Pedidos de Orações" description="Peça orações que serão realizadas por padres e fiéis" icon="send-1" />
-              <CardComponent href="" title="Horários de Celebrações" description="Veja os horários de celebrações" icon="clock" />
+              <CardComponent href="" title="Pedidos de Orações" icon="send-1" />
+              <CardComponent href="" title="Horários de Celebrações" icon="clock" />
             </Grid>
           </TitleWithComponent>
 
           <TitleWithComponent>
-            <TitleComponent title="Serviços" seeMore />
-            <Grid $columns={2} $rows={1} >
-              <CardComponent href="" title="Batismo" description="Assista de onde estiver" vertical image="https://images.pexels.com/photos/19891488/pexels-photo-19891488/free-photo-of-abstrato-resumo-abstrair-aquatico.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
-              <CardComponent href="" title="Casamento" description="Assista de onde estiver" vertical image="https://images.pexels.com/photos/19809164/pexels-photo-19809164/free-photo-of-arte-modelo-de-moda-modelo-de-beleza-preto.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+            <TitleComponent title="Liturgia de Hoje"/>
+            <Grid $columns={1} $rows={1} >
+              <CardComponent href="" title="São Paulo Miki e companheiros mártires" vertical image="https://r2.padrepauloricardo.org/uploads/episodio/share_image/3447/1703-memoria-de-sao-paulo-miki-e-companheiros-martires-frame.jpg" />
             </Grid>
           </TitleWithComponent>
 
@@ -52,10 +51,7 @@ export function SectionTwoComponent() {
               </SeeMoreComponent>
               <Buttons>
                 <ButtonComponent>
-                  História da Paróquia
-                </ButtonComponent>
-                <ButtonComponent inverted>
-                  História do Medalhão
+                  História Completa
                 </ButtonComponent>
               </Buttons>
             </Text>

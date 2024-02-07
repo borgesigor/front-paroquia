@@ -5,7 +5,7 @@ interface Props{
   responsive?: boolean,
   vertical?: boolean,
   title: string,
-  description: string,
+  description?: string,
   image?: string,
   href: string,
   imageSmall?: string
@@ -31,7 +31,7 @@ export function CardComponent(props: Props) {
         }
         <DataElement>
           <span className='title'>{props.title}</span>
-          <span className='description'>{props.description}</span>
+          { props.description && <span className='description'>{props.description}</span> }
         </DataElement>
       </CardData>
     </Card>
@@ -50,6 +50,8 @@ const Card = styled.a`
   border-color: ${props => props.theme.borderColor};
   color: ${props => props.theme.primaryColor};
   box-sizing: border-box;
+  transition: .1s;
+  transition-property: border-color;
 
   &:hover{
     border-color: ${props => props.theme.borderHardColor};
@@ -77,6 +79,8 @@ const DataElement = styled.div`
 
   .title{
     font-size: 1rem;
+    /* font-family: ${props => props.theme.secondaryFont}; */
+    font-weight: 600;
   }
 
   .description{
@@ -93,5 +97,6 @@ const CardData = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 1rem 1rem;
+  padding-right: 2rem;
   gap: 1rem;
 `

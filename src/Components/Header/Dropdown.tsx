@@ -35,21 +35,25 @@ export function DropdownComponent(props: Props) {
             </CardsContainer>
         }
 
-        <ItemsContainer $itemsQuantity={dropdown.items.length} >
+        {
+          dropdown.items &&
+            <ItemsContainer $itemsQuantity={dropdown.items.length} >
 
-          {
-            dropdown.items.map((elem, index)=>
-              <Item key={index} href={elem.path} $inverted >
-                { elem.icon && <ItemIcon className="material-symbols-rounded item-icon">{elem.icon}</ItemIcon> }
-                <ItemInfos>
-                  <ItemTitle className='item-title' >{elem.title}</ItemTitle>
-                  { elem.description &&  <ItemDescription>{elem.description}</ItemDescription> }
-                </ItemInfos>
-              </Item>
-            )
-          }
+              {
+                dropdown.items.map((elem, index)=>
+                  <Item key={index} $inverted href={elem.path} >
+                    { elem.icon && <ItemIcon className="material-symbols-rounded item-icon">{elem.icon}</ItemIcon> }
+                    <ItemInfos>
+                      <ItemTitle className='item-title' >{elem.title}</ItemTitle>
+                      { elem.description &&  <ItemDescription>{elem.description}</ItemDescription> }
+                    </ItemInfos>
+                  </Item>
+                )
+              }
 
-        </ItemsContainer>
+            </ItemsContainer>
+        }
+
 
       </Dropdown>
     </>
@@ -66,13 +70,6 @@ const Dropdown = styled.div`
 
   max-width: ${props => props.theme.headerWidth};
   margin: 0 auto;
-
-  /* box-shadow: 0px 1px 1px rgba(3, 7, 18, 0.08),
-  0px 5px 4px rgba(3, 7, 18, 0.06),
-  0px 12px 9px rgba(3, 7, 18, 0.05),
-  0px 20px 15px rgba(3, 7, 18, 0.03),
-  0px 32px 24px rgba(3, 7, 18, 0.02); */
-
 
   display: flex;
   gap: 2rem;
@@ -161,6 +158,8 @@ const Item = styled.a<{ $inverted?: boolean }>`
   cursor: pointer;
   position: relative;
   z-index: 1;
+  max-width: 300px;
+  line-height: 170%;
 
   color: ${props => props.$inverted ? props.theme.primaryColor : props.theme.background };
 
@@ -194,15 +193,16 @@ const ItemInfos = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.4rem;
+  /* gap: 0.4rem; */
 `
 
 const ItemTitle = styled.div`
   font-size: 1rem;
+  font-weight: 500;
 `
 
 const ItemDescription = styled.div`
-  font-weight: 300;
+  font-weight: 400;
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.6;
 `

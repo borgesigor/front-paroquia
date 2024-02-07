@@ -22,8 +22,8 @@ Corações e Unindo Almas no Amor do Pai Eterno.</InformationTextsDescription>
 
           <div>
             <Button>
-              <i className="iconsax" icon-name="location" style={{ fontSize: '1.2rem' }}></i>
-              Praça do Santuário, 238 - Centro, Trindade - GO
+              História da Paróquia
+              <i className="material-symbols-rounded" style={{ fontSize: '1.4rem' }}> arrow_forward </i>
             </Button>
           </div>
         </Information>
@@ -34,9 +34,11 @@ Corações e Unindo Almas no Amor do Pai Eterno.</InformationTextsDescription>
   );
 }
 
+const BannerSize = '75vh';
+
 const MarginContainer = styled.div`
   width: 100%;
-  height: 72vh;
+  height: ${BannerSize};
   position: relative;
   z-index: -1;
 `
@@ -48,7 +50,7 @@ const BannerContainer = styled.div`
   position: absolute;
   z-index: 0;
   width: 100%;
-  height: 72vh;
+  height: ${BannerSize};
 `
 
 const Image = styled.img`
@@ -58,7 +60,7 @@ const Image = styled.img`
   position: absolute;
   left: 0;
   top: 0;
-  filter: brightness(100%) contrast(70%);
+  filter: brightness(110%) contrast(100%);
 `
 
 const OverlayEffect = styled.div`
@@ -78,7 +80,7 @@ const Information = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 5rem 1rem;
+  padding: 5rem 2rem;
   box-sizing: border-box;
   text-align: center;
   color: white;
@@ -92,7 +94,7 @@ const InformationTexts = styled.div`
 `
 
 const InformationTextsTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 600;
   line-height: 120%;
 `
@@ -102,32 +104,44 @@ const InformationTextsDescription = styled.p`
   font-weight: 500;
   max-width: 34rem;
   color: #e7e7e7;
-  opacity: 0.8;
+  opacity: 1;
   line-height: 170%;
   font-family: ${props => props.theme.secondaryFont};
 `
 
 const Button = styled.button`
-  background: #ffffff1d;
-  padding: 0.5rem 1rem;
+  background: white;
+  padding: 0.7rem 1rem;
+  padding-left: 1.2rem;
   border-radius: 2rem;
-  color: white;
+  color: #141414;
   transition: 0.3s;
-  border: 1px solid #ffffff26;
-  opacity: 80%;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  backdrop-filter: blur(4px);
   text-align: left;
   line-height: 120%;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   font-family: ${props => props.theme.secondaryFont};
+  border: none;
+  text-align: center;
+
+  opacity: 1;
+
+  i{
+    position: relative;
+    left: 0rem;
+    transition: .2s;
+  }
 
   &:hover {
-    border: 1px solid #ffffff4c;
+    /* border: 1px solid #ffffff4c; */
     opacity: 90%;
+
+    i{
+      left: 0.2rem;
+    }
   }
 `
